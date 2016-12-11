@@ -21,39 +21,33 @@
     let outputs = Dictionary<OutputId,Output>()
     let instructions = Dictionary<BotId, Instruction>()
 
-    let addBot botId =
+    let getBot botId =
         if not (bots.ContainsKey(botId)) then 
             let bot = { id = botId ; chip1 = None ; chip2 = None }
             bots.Add(botId, bot)
         bots.[botId]
 
-    let addOutput outputId =
+    let getOutput outputId =
         if not (outputs.ContainsKey(outputId)) then 
             let output = { id = outputId ; chips = [] }
             outputs.Add(outputId, output)
         outputs.[outputId]
 
-    let giveToBot chip botId = 
-        let giveToBot chip bot = 
-            match bot with
-            | { id = _ ; chip1 = None ; chip2 = None } -> 
-                bot.chip1 <- Some(chip)
-            | { id = botId ; chip1 = Some(c) ; chip2 = None } -> 
-                let c1 = min chip c
-                let c2 = max chip c
-                if c1 = Chip(17) && c2 = Chip(61) then  result <- Some(botId)
-                //if c1 = Chip(2) && c2 = Chip(5) then  result <- Some(botId)
-                bot.chip1 <- Some(c1)
-                bot.chip2 <- Some(c2)
-            | _ -> invalidOp (String.Format("bot {0} already has two chips", id))
-        let bot = addBot botId
-        giveToBot chip bot
+    let giveToBot chip bot = 
+        match bot with
+        | { id = _ ; chip1 = None ; chip2 = None } -> 
+            bot.chip1 <- Some(chip)
+        | { id = botId ; chip1 = Some(c) ; chip2 = None } -> 
+            let c1 = min chip c
+            let c2 = max chip c
+            if c1 = Chip(17) && c2 = Chip(61) then  result <- Some(botId)
+            //if c1 = Chip(2) && c2 = Chip(5) then  result <- Some(botId)
+            bot.chip1 <- Some(c1)
+            bot.chip2 <- Some(c2)
+        | _ -> invalidOp (String.Format("bot {0} already has two chips", id))
 
-    let giveToOutput chip outputId = 
-        let giveToOutput chip output = 
-            output.chips <- chip::(output.chips)
-        let output = addOutput outputId
-        giveToOutput chip output
+    let giveToOutput chip output = 
+        output.chips <- chip::(output.chips)
 
     let emptyBot bot =
         bot.chip1 <- None
@@ -64,23 +58,24 @@
         | Regex "^value (?<chip>\d+) goes to bot (?<botId>\d+)$" [ chip ; botId ] ->
             let chip = chip |> int |> Chip
             let botId = botId |> int |> BotId
-            giveToBot chip botId
+            let bot = getBot botId
+            giveToBot chip bot
         | Regex "^bot (?<giverBotId>\d+) gives low to (?<botOrOutputLow>bot|output) (?<idLow>\d+) and high to (?<botOrOutputHigh>bot|output) (?<idHigh>\d+)$" 
                     [ giverBotId ; botOrOutputLow ; idLow ; botOrOutputHigh ; idHigh ] ->
             let getReceiver botOrOutput id = 
                 match botOrOutput with
                 | "bot" -> 
                     let botId = id |> BotId
-                    let bot = addBot botId
+                    let bot = getBot botId
                     BotReceiver(bot)
                 | _ ->
                     let outputId = id |> OutputId
-                    let output = addOutput outputId
+                    let output = getOutput outputId
                     OutputReceiver(output)
             let giverBotId = giverBotId |> int |> BotId
             let idLow = idLow |> int
             let idHigh = idHigh |> int
-            let bot = addBot giverBotId
+            let bot = getBot giverBotId
             let instruction = Instruction(bot, (getReceiver botOrOutputLow idLow), (getReceiver botOrOutputHigh idHigh))
             instructions.Add( giverBotId, instruction)
         | _ -> invalidOp "bad line"
@@ -95,21 +90,19 @@
             for bot in bots.Values do
                 match bot with
                 | { id = botId ; chip1 = Some(c1) ; chip2 = Some(c2) } -> 
-                    let (Instruction(bot, rec1, rec2)) = instructions.[botId]
-                    let action1 = Give(c1, bot, rec1)
-                    let action2 = Give(c2, bot, rec2)
-                    yield action1
-                    yield action2
+                        let (Instruction(bot, rec1, rec2)) = instructions.[botId]
+                        yield Give(c1, bot, rec1)
+                        yield Give(c2, bot, rec2)
                 | _ -> ()
         }
         
     let rec doActions() = 
         let doAction (Give(chip,bot,receiver)) = 
             match receiver with
-            | BotReceiver( { id = botId ; chip1 = _ ; chip2 = _ } ) -> 
-                giveToBot chip botId
-            | OutputReceiver( { id = outputId ; chips = _ } ) -> 
-                giveToOutput chip outputId
+            | BotReceiver(bot) -> 
+                giveToBot chip bot
+            | OutputReceiver(output) -> 
+                giveToOutput chip output
             emptyBot bot
 
         let mutable actionDone = false
