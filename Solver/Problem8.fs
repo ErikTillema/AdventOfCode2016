@@ -31,7 +31,7 @@
 
     let countLit (grid: bool[,]) =
         grid |> Seq.cast<_> // unfortunately we need a cast to convert the Array2D to a typed sequence. I don't completely understand...
-            |> Seq.filter id |> Seq.length
+             |> Seq.filter id |> Seq.length
 
     let parseInstruction (line: String) = 
         let sc = Scanner(line, " \txy=", false)

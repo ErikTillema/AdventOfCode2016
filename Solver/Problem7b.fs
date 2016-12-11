@@ -16,9 +16,9 @@
     let reverseAba (c1,c2) = (c2,c1)
 
     let isSsl (parts1: char array list) (parts2: char array list) =
-        let abas1 = parts1 |> List.map getAbas |> List.concat
-        let abas2 = parts2 |> List.map getAbas |> List.concat |> List.map reverseAba |> Set.ofList
-        let result = abas1 |> List.exists abas2.Contains
+        let abas1 = parts1 |> List.collect getAbas
+        let abas2 = parts2 |> List.collect getAbas |> List.map reverseAba |> Set.ofList
+        let result = abas1 |> List.exists (fun aba -> abas2.Contains(aba))
         if result then printfn "%s" (parts1 |> List.map String |> String.concat " ")
         result
 

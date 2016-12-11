@@ -15,6 +15,9 @@ let main argv =
     //Problem5b.solve()
     //Problem6.solve()
     //Problem7a.solve()
-    //Problem7b.solve()
-    Problem8.solve()
+    Problem7b.solve()
+    //Problem8.solve()
+    //Problem9a.solve()
+    //Problem9b.solve()
+    //Problem10.solve()
     0 // return an integer exit code
