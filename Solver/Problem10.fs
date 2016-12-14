@@ -16,6 +16,7 @@
     type Action = Give of Chip * Bot * Receiver
     type Instruction = Instruction of Bot * Receiver * Receiver
 
+    let chip1, chip2 = 2,5
     let mutable result: BotId option = None
     let bots = Dictionary<BotId,Bot>()
     let outputs = Dictionary<OutputId,Output>()
@@ -40,8 +41,7 @@
         | { id = botId ; chip1 = Some(c) ; chip2 = None } -> 
             let c1 = min chip c
             let c2 = max chip c
-            if c1 = Chip(17) && c2 = Chip(61) then  result <- Some(botId)
-            //if c1 = Chip(2) && c2 = Chip(5) then  result <- Some(botId)
+            if c1 = Chip(chip1) && c2 = Chip(chip2) then  result <- Some(botId)
             bot.chip1 <- Some(c1)
             bot.chip2 <- Some(c2)
         | _ -> invalidOp (String.Format("bot {0} already has two chips", id))

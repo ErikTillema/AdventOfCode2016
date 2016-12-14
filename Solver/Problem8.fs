@@ -66,7 +66,7 @@
             printfn ""
 
     let solve() =
-        let grid = Array2D.init 50 6 (fun _ _ -> false) // 7 3
+        let grid = Array2D.init 7 3 (fun _ _ -> false)
         for ins in parseInstructions do
             updateGrid ins grid
         printGrid grid

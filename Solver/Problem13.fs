@@ -4,7 +4,7 @@
     open System
     open System.Collections.Generic
 
-    let a = 1362 // 10 // 1362
+    let a = 10
     let distance = Dictionary<int*int,int>() // mutable
     let dx = [| -1; 1; 0; 0 |]
     let dy = [| 0; 0; -1; 1 |]
@@ -68,7 +68,7 @@
 
     let solve() =
         let from = (1,1)
-        let too = (31,39) // (7,4)
+        let too = (7,4)
         bfs from too
         let result = distance.[too]
         printfn "%i" result

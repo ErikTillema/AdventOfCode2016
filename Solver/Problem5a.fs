@@ -17,7 +17,7 @@
         else getNextGoodHash s (i+1)
 
     let solve() = 
-        let s = "ojvtpuvg" //"abc"
+        let s = "abc"
         let mutable i = 0
         for _ in [1..8] do
             let hash, j = getNextGoodHash s i

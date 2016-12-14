@@ -30,6 +30,6 @@
         parts1, parts2
 
     let solve() =
-        let sc = Scanner(@"..\..\Problem7.test.in") // @"..\..\Problem7b.test.in"
+        let sc = Scanner(@"..\..\Problem7b.test.in")
         let n = sc.Lines |> Seq.map parseParts |> Seq.filter (fun (p1,p2) -> isSsl p1 p2) |> Seq.length
         printfn "%i" n

@@ -22,7 +22,7 @@
         a |> String
 
     let solve() =
-        let n = 8
+        let n = 6
         let allStats = Array.init n (fun i -> Dictionary<char,int>())
         let sc = new Scanner(@"..\..\Problem6.test.in")
         for line in sc.Lines do

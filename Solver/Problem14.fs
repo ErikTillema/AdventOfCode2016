@@ -6,7 +6,7 @@
     open System.Security.Cryptography
 
     let hashes = 2017 // 1 for silver, 2017 for gold
-    let prefix = "abc" //"abc" // "yjdafjpo"
+    let prefix = "abc"
     let mutable lastCalculated = -1
     let triplets = List<int*byte>() // mutable
     let lastQuintet = Dictionary<byte,int>() // mutable

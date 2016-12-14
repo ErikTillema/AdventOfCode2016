@@ -16,7 +16,7 @@
         | _ -> s.Length |> int64
 
     let solve() =
-        let sc = Scanner(@"..\..\Problem9.test.in")
+        let sc = Scanner(@"..\..\Problem9b.test.in")
         let lengths = sc.Lines |> Seq.map getLength
         for l in lengths do
             printfn "%i" l

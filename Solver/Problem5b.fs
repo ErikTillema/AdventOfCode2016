@@ -40,7 +40,7 @@
             getPassword s (j+1) password
 
     let solve() = 
-        let s = "ojvtpuvg" //"abc"
+        let s = "abc"
         let password = (Array.create 8 None)
         getPassword s 0 password
         for b in password do

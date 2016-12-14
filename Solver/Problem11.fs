@@ -1,47 +1,18 @@
-﻿(* 
-10 (14) items + 1 elevator = 11 (15)
-4 floors
-4 ^ 11 (15) = 4.10^6 (1.10^9) states
-calculate distance for each state
-start with final state with distance zero
-generate other states and set distance
-stop when target state (initial state) has been found
-
-generate other states:
-    take 1 or 2 items out of 10 (14)
-    calculate if new state is valid
-
-improving pruning:
-- consider symmetry: the types don't really matter:
-    [| 1; 2; 0; 0; 3 |] == [| 0; 0; 1; 2; 3 |]
-    So, let's take couples and order them.
-
-    How much does this symmetry help?
-    7 types, 16 possibilities each.
-
-    suppose 2 types: instead of 16^2 unsorted possibilities remain only 16 + 15*16/2
-    suppose 3 types: instead of 16^3 unsorted possibilities remain only 16 + 15*16/2*2 + 14*15*16/3!
-        in most cases, the 3 numbers are different. Then sorting cuts a factor of 3! = 6
-    so for 7 types, this can make say factor 7! = 5040 difference.
-*)
-
-module Problem11
+﻿module Problem11
 
     open Util
     open System
     open System.Collections.Generic
 
     let floors = 4
-    let types = 7 //5 //7 //2
+    let types = 2
     let items = types * 2
     
     let distance = Dictionary<int,int>()
 
     type State = State of (int*int)[] * int
 
-    //let initialState = State( [| (1,0); (2,0) |], 0)
-    //let initialState = State( [| (0,0); (0,0); (0,0); (0,1); (0,1) |], 0)
-    let initialState = State( [| (0,0); (0,0); (0,0); (0,0); (0,0); (0,1); (0,1) |], 0)
+    let initialState = State( [| (1,0); (2,0) |], 0)
 
     let mutable found = false
     let mutable edges = 0
