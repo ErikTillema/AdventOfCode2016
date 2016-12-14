@@ -47,7 +47,7 @@
         letters |> List.map (rotate n)
 
     let solve() = 
-        let sc = Scanner(@"..\..\Problem4.in")
+        let sc = Scanner(@"..\..\Problem4.test.in")
         let rooms = sc.Lines |> Seq.map parseRoom |> List.ofSeq
         let realRooms = rooms |> List.filter isReal
         let sumIds = realRooms |> List.sumBy (fun (Room(_,id,_)) -> id)

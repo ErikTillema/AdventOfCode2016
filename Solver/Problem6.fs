@@ -24,7 +24,7 @@
     let solve() =
         let n = 8
         let allStats = Array.init n (fun i -> Dictionary<char,int>())
-        let sc = new Scanner(@"..\..\Problem6.in")
+        let sc = new Scanner(@"..\..\Problem6.test.in")
         for line in sc.Lines do
             updateAllStats line allStats
         let message = getMessage allStats

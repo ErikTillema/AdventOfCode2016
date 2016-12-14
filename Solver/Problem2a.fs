@@ -35,7 +35,7 @@
         Path(moves)
 
     let parsePaths = 
-        let sc = Scanner(@"..\..\Problem2.in")
+        let sc = Scanner(@"..\..\Problem2.test.in")
         sc.Lines |> Seq.map parsePath
 
     let solve() = 

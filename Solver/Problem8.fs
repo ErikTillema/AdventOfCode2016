@@ -54,7 +54,7 @@
                 RotateRow(y,d)
 
     let parseInstructions =
-        let sc = Scanner(@"..\..\Problem8.in")
+        let sc = Scanner(@"..\..\Problem8.test.in")
         sc.Lines |> Seq.map parseInstruction
 
     let printGrid (grid: bool[,]) = 

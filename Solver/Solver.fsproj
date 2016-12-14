@@ -71,6 +71,10 @@
     <Compile Include="Problem9a.fs" />
     <Compile Include="Problem9b.fs" />
     <Compile Include="Problem10.fs" />
+    <Compile Include="Problem11.fs" />
+    <Compile Include="Problem12.fs" />
+    <Compile Include="Problem13.fs" />
+    <Compile Include="Problem14.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>

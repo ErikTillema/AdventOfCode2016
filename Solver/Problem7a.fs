@@ -23,7 +23,7 @@
         parts1, parts2
 
     let rec parseTlss = 
-        let sc = Scanner(@"..\..\Problem7.in");
+        let sc = Scanner(@"..\..\Problem7.test.in");
         sc.Lines |> Seq.map parseTls
 
     let solve() =

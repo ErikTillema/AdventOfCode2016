@@ -63,7 +63,7 @@
         Action( parseTurn token.[0], token.Substring(1, token.Length - 1) |> int )
 
     let parseActions = 
-        let sc = Scanner(@"..\..\Problem1.in", " \t\r\n,")
+        let sc = Scanner(@"..\..\Problem1.test.in", " \t\r\n,")
         sc.Tokens |> Seq.map parseAction
 
     let solve() =

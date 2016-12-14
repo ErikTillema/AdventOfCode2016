@@ -81,7 +81,7 @@
         | _ -> invalidOp "bad line"
 
     let parseInput = 
-        let sc = Scanner(@"..\..\Problem10.in")
+        let sc = Scanner(@"..\..\Problem10.test.in")
         for line in sc.Lines do
             parseLine line
 

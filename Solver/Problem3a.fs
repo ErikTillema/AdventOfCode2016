@@ -7,7 +7,7 @@
         sortedSides.[0] + sortedSides.[1] > sortedSides.[2]
 
     let rec parseTriangles = 
-        let sc = Scanner(@"..\..\Problem3.in")
+        let sc = Scanner(@"..\..\Problem3.test.in")
         seq {
             match sc.NextInt(), sc.NextInt(), sc.NextInt() with
             | Some(s1), Some(s2), Some(s3) -> 
