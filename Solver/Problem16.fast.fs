@@ -6,8 +6,8 @@
     let getBitField (s: String) = 
         [ for c in s -> c = '1' ] |> List
 
-    let n = 35651584 // 20 // 272 // 35651584
-    let bitField = getBitField("10111100110001111") //"10000" // "10111100110001111" // mutable
+    let n = 20
+    let bitField = getBitField("10000") // mutable
 
     let double() =
         let n = bitField.Count
@@ -31,4 +31,3 @@
         doubleUntil n
         getChecksum()
         printfn "%s" (bitField |> Seq.map (fun b -> if b then "1" else "0") |> String.concat "")
-        ()

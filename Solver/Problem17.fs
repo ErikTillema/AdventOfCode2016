@@ -6,7 +6,7 @@
     open System.Security.Cryptography
 
     let w, h = 4, 4
-    let input = "vwbaicqe" // "ulqzkmiv" // "ihgpwlah" // "hijkl" // "vwbaicqe"
+    let input = "ihgpwlah"
     let md5 = MD5.Create()
 
     let dx = [| 0; 0; -1; 1 |]
@@ -30,8 +30,8 @@
 
     let bfsSilver start endd =
         let q = List<int*int*string>()
-        let startx,starty = start
-        let endx,endy = endd
+        let (startx,starty) = start
+        let (endx,endy) = endd
         q.Add(startx,starty,input)
         let mutable result = None
         while q.Count > 0 && result.IsNone do

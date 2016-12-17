@@ -2,8 +2,7 @@
 
     open MathExt
 
-    //let discs = [| (1,5,4); (2,2,1); |] // (index, slots, position)
-    let discs = [| (1,5,2); (2,13,7);  (3,17,10);  (4,3,2); (5,19,9); (6,7,0); (7,11,0); |] // (index, slots, position)
+    let discs = [| (1,5,4); (2,2,1); |] // (index, slots, position)
 
     // p prime
     // solves a*x = b (mod p)

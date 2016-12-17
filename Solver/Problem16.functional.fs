@@ -6,8 +6,8 @@
     let getBitField (s: String) = 
         [ for c in s -> c = '1' ]
 
-    let n = 20 // 20 // 272 // 35651584
-    let start = getBitField("10111100110001111") //"10000" // "10111100110001111"
+    let n = 20
+    let start = getBitField("10000")
 
     let flip bitField = 
         bitField |> List.map not
@@ -33,5 +33,4 @@
     let solve() = 
         let bitField = doubleUntil n start
         let checksum = bitField |> Array.ofSeq |> getChecksum
-        printfn "%s" (bitField |> Seq.map (fun b -> if b then "1" else "0") |> String.concat "")
-        ()
+        printfn "%s" (checksum |> Seq.map (fun b -> if b then "1" else "0") |> String.concat "")

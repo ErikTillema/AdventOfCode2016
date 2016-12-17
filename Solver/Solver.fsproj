@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Util.fs" />
+    <Compile Include="MathExt.fs" />
+    <Compile Include="BigIntegerExt.fs" />
     <Compile Include="Problem1.fs" />
     <Compile Include="Problem2a.fs" />
     <Compile Include="Problem2b.fs" />
@@ -75,6 +77,11 @@
     <Compile Include="Problem12.fs" />
     <Compile Include="Problem13.fs" />
     <Compile Include="Problem14.fs" />
+    <Compile Include="Problem15.fs" />
+    <Compile Include="Problem15.BigInteger.fs" />
+    <Compile Include="Problem16.fast.fs" />
+    <Compile Include="Problem16.functional.fs" />
+    <Compile Include="Problem17.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
