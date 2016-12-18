@@ -29,4 +29,5 @@ let main argv =
     Problem16.solve()
     Problem16_Functional.solve()
     Problem17.solve()
+    Problem18.solve()
     0 // return an integer exit code

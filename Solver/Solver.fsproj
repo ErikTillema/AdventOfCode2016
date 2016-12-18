@@ -82,6 +82,7 @@
     <Compile Include="Problem16.fast.fs" />
     <Compile Include="Problem16.functional.fs" />
     <Compile Include="Problem17.fs" />
+    <Compile Include="Problem18.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
