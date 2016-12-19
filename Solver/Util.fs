@@ -18,23 +18,25 @@
         let reader = 
             if isFile then new StreamReader(filepath) :> TextReader // @@@ using statement?. Make scanner IDisposable?
             else new StringReader(filepath) :> TextReader
-
-        let rec nextTokenOrEOF() = 
-            let i = reader.Read()
-            if i = -1 then
-                atEndOfFile <- true
-                ""
-            else
-                let c = char i
-                if separators.Contains(c) then ""
-                else (string c + nextTokenOrEOF())
     
         let rec next() = 
-            if atEndOfFile then None
-            else 
-                let s = nextTokenOrEOF()
-                if s.Length > 0 then Some(s)
-                else next()
+            let rec nextTokenOrEOF acc = 
+                let i = reader.Read()
+                if i = -1 then
+                    atEndOfFile <- true
+                    List.rev acc
+                else
+                    let c = char i
+                    if separators.Contains(c) then List.rev acc
+                    else nextTokenOrEOF (c::acc)
+            match atEndOfFile with 
+            | true -> None
+            | false ->
+                let chars = nextTokenOrEOF [] |> List.toArray
+                if chars.Length > 0 then 
+                    Some(chars |> String)
+                else 
+                    next()
 
         let nextInt() = next() |> Option.map int
 
@@ -50,18 +52,15 @@
 
         let rec tokens = 
             seq {
-                if not atEndOfFile then
-                    let token = nextTokenOrEOF()
-                    if token.Length > 0 then yield token
+                match next() with
+                | None -> ()
+                | Some(token) ->
+                    yield token
                     yield! tokens
             }
-
-        let toString (chars: char seq) = 
-            chars |> Seq.toArray |> String
 
         member x.Next() = next()
         member x.NextInt() = nextInt()
         member x.NextLong() = nextLong()
         member x.Lines = lines
         member x.Tokens = tokens
-        member x.ToString = toString
