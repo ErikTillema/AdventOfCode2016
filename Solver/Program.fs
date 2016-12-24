@@ -42,4 +42,5 @@ let main argv =
     Problem22b.solve()
     Problem23.solveSilver()
     Problem23.solveGold()
+    Problem24.solve()
     0 // return an integer exit code

@@ -93,6 +93,7 @@
     <Compile Include="Problem22a.fs" />
     <Compile Include="Problem22b.fs" />
     <Compile Include="Problem23.fs" />
+    <Compile Include="Problem24.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
