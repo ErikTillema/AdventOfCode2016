@@ -47,10 +47,10 @@
     let makeSteps (State(Location(x,y), orientation, seenTwice)) (Action(turn, distance)) =
         let orientation = makeTurn turn orientation
         let newLocation = match orientation with
-            | N -> Location(x,y+distance)
-            | S -> Location(x,y-distance)
-            | E -> Location(x+distance,y)
-            | W -> Location(x-distance,y)
+                          | N -> Location(x,y+distance)
+                          | S -> Location(x,y-distance)
+                          | E -> Location(x+distance,y)
+                          | W -> Location(x-distance,y)
         let seenTwice = updateSeen (Location(x,y)) newLocation seenTwice
         State(newLocation, orientation, seenTwice)
 
