@@ -54,7 +54,7 @@
                         dist.Add( (nx,ny), d+1 )
                         q.Enqueue(nx,ny)
 
-    let rec getBestPath don (used: bool[]) totalDistance lastWaypoint =
+    let rec getShortestPath don (used: bool[]) totalDistance lastWaypoint =
         if don = waypoints then
             shortestPath <- min shortestPath totalDistance // Silver star
             //shortestPath <- min shortestPath (totalDistance + distance.[lastWaypoint,0]) // Gold star
@@ -63,7 +63,7 @@
                 if not used.[i] then
                     // choose next waypoint to be i
                     used.[i] <- true
-                    getBestPath (don+1) used (totalDistance + distance.[lastWaypoint,i]) i
+                    getShortestPath (don+1) used (totalDistance + distance.[lastWaypoint,i]) i
                     used.[i] <- false
 
     let solve() =
@@ -72,5 +72,5 @@
             bfs i
         let used = Array.replicate waypoints false
         used.[0] <- true
-        getBestPath 1 used 0 0
+        getShortestPath 1 used 0 0
         printfn "%i" shortestPath
